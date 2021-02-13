@@ -49,8 +49,11 @@ cd docs && python -m http.server 3000
 [github预览](https://wulusai2333.github.io/read)
 
 1.将代码上传到github仓库中
+
 2.在仓库上边导航栏找到 齿轮 `Settings`
+
 3.页面往下翻,找到 `GitHub Pages`,也可以直接使用`ctrl+f`搜索
+
 4.`source` 选择分支,我这里是`master`分支,路径`docs`,点击`save`保存
 
 ## 编写警告
