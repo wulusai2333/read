@@ -6,7 +6,7 @@
 - Python
 
 - Rust
-
+	- [开始](zh-cn/Rust/start.md)
 - Linux
 
 - Node.js
