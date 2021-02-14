@@ -7,6 +7,8 @@
 >
 > MinGW
 
+我觉得[菜鸟教程环境搭建](https://www.runoob.com/rust/rust-setup.html) 是更详细的搭建过程...
+
 安装rust参考官方文档 [rust](https://www.rust-lang.org/zh-CN/tools/install) 其中[微软C++生成工具](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/) 咱直接安装了下面介绍的完整环境
 
 [MinGW](https://jaist.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/sjlj/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0.7z) 它实际上是将经典的开源 C语言 编译器 GCC 移植到了 Windows 平台下，并且包含了 Win32API ，因此可以将源代码编译为可在 Windows 中运行的可执行程序。
@@ -46,3 +48,12 @@ cargo build
 ### VScode
 
 在拓展`ctrl+shift+x`搜索rls安装rust插件 
+
+### 再补充几个 cargo 的重要子命令(菜鸟教程评论区cv的)
+
+cargo clippy: 类似eslint，lint工具检查代码可以优化的地方
+cargo fmt: 类似go fmt，代码格式化
+cargo tree: 查看第三方库的版本和依赖关系
+cargo bench: 运行benchmark(基准测试,性能测试)
+cargo udeps(第三方): 检查项目中未使用的依赖
+另外 cargo build/run --release 使用 release 编译会比默认的 debug 编译性能提升 10 倍以上，但是 release 缺点是编译速度较慢，而且不会显示 panic backtrace 的具体行号
