@@ -58,3 +58,8 @@ cd docs && python -m http.server 3000
 
 4.`source` 选择分支,我这里是`master`分支,路径`docs`,点击`save`保存
 
+### 配置自定义域名并使用https解析
+[配置帖子](https://likfe.com/2018/05/03/github-pages-custom-domains-support-https/) 
+我使用的是主域名,记录类型`CNAME`,记录值`wulusai2333.github.io`,线路类型`默认`,
+线路类型`国内`是无法成功申请https的,此时在项目的`setting>GitHub Pages`会有绿色提示`Your site is published at 域名`,
+等待24小时https证书申请完毕即可勾选`Enforce HTTPS`

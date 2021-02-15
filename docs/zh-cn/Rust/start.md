@@ -45,6 +45,8 @@ cargo build
 
 在设置里搜索`Toolchains`添加MinGW
 
+不知道是不是我个人配置的问题,clion的rust插件对rust的代码提示十分薄弱,运行时异常都没检查出来
+
 ### VScode
 
 在拓展`ctrl+shift+x`搜索rls安装rust插件 
@@ -52,8 +54,16 @@ cargo build
 ### 再补充几个 cargo 的重要子命令(菜鸟教程评论区cv的)
 
 cargo clippy: 类似eslint，lint工具检查代码可以优化的地方
+
 cargo fmt: 类似go fmt，代码格式化
+
 cargo tree: 查看第三方库的版本和依赖关系
+
 cargo bench: 运行benchmark(基准测试,性能测试)
+
 cargo udeps(第三方): 检查项目中未使用的依赖
-另外 cargo build/run --release 使用 release 编译会比默认的 debug 编译性能提升 10 倍以上，但是 release 缺点是编译速度较慢，而且不会显示 panic backtrace 的具体行号
+
+另外 cargo build/run --release 使用 release 编译会比默认的 
+
+debug 编译性能提升 10 倍以上，但是 release 缺点是编译速度较慢，而且不会显示 panic backtrace 的具体行号
+
