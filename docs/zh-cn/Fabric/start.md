@@ -24,7 +24,7 @@ GO111MODULE=on go build
 
 #### 1.安装和更新基础软件
 
-```shell
+```bash
 sudo apt-get update
 sudo apt-get install apt-transport-https ca-certificates curl git software-properties-common lrzsz -y
 #添加阿里的docker镜像仓库
@@ -82,7 +82,7 @@ sudo ufw disable
 
 #### 2.安装fabric-sample
 
-```shell
+```bash
 #可以获取的是官方最新版的
 wget https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh
 #可以这样指定版本
@@ -115,7 +115,7 @@ tls -> ssl  https 都是加密的,节点间需要证书
 
 #### 逻辑架构
 
-```shell
+```bash
 #程序员需要做的
 身份管理inentity	->成员服务membership	->注册登录enroliment 属性证书attributes		
 
@@ -237,7 +237,7 @@ configtxlator 区块和交易解析模块 ->解析成json格式
 
 #### cryptogen命令生成证书文件
 
-```shell
+```bash
 crptogen showtemplate > crypto-config.yaml #生成模板配置文件
 #修改配置文件内容
 cryptogen generate --config=crypto-config.yaml #根据指定配置文件生成证书
@@ -255,7 +255,7 @@ msp 是什么?
 
 #### 创世块文件和通道文件生成
 
-```shell
+```bash
 #需要从fabric-sample/first-network下复制configtx.yaml并修改
 #已知Capabilities规则修改会导致创建通道失败
 configtxgen --help
@@ -293,7 +293,7 @@ commit 提交节点 把数据写入到区块链中
 
 docker-compose
 
-```shell
+```bash
 #启动 守护进程
 docker-compose -f docker-compose-cli.yaml up -d 
 #所有容器 up状态为up 且有端口映射才算成功
@@ -309,7 +309,7 @@ docker rm `docker ps -aq` -f
 
 #### cli容器操作节点
 
-```shell
+```bash
 步骤总结:
 	先用orderer的证书创建通道
 	设置环境变量peer0.org1 加入通道
@@ -338,7 +338,7 @@ peer chaincode query -C wulusaichannel -n bhxycc -c '{"Args":["queryUser", "2"]}
 
 ##### 环境配置
 
-```shell
+```bash
 环境配置都放在scripts/changepath.sh中了,可以指定不同节点的环境变量执行peer channel join
 查看当前节点是否加入通道: peer channel list
 ```
@@ -347,7 +347,7 @@ peer chaincode query -C wulusaichannel -n bhxycc -c '{"Args":["queryUser", "2"]}
 
 ##### 创建通道
 
-```shell
+```bash
 #创建通道
 peer channel create -o orderer地址:7050 -c 通道名 -f 通道文件 --tls true --cafile orderer节点pem证书文件绝对路径
 #crypto-config/ordererOrganizations/wulusai.net/tlsca/tlsca.wulusai.net-cert.pem这是宿主机的文件,在cli中应该找客户端的文件绝对路径
@@ -359,14 +359,14 @@ peer channel create -o orderer.wulusai.net:7050 -c wulusaichannel -f ./channel-a
 
 ##### 当前节点加入通道
 
-```shell
+```bash
 #当前节点加入通道 这里用org1的管理员添加一次 再用org2的管理员添加一次
 peer channel join -b wulusaichannel.block
 ```
 
 ##### 更新锚节点
 
-```shell
+```bash
 #更新锚节点 在configtx.yaml中已经指定了默认锚节点 如果不需要更换锚节点这一步可以不做
 peer channel update -o orderer节点地址:端口 -c 通道名 -f 锚节点更新文件 --tls true --cafile orderer节点pem格式证书文件
 #更新锚节点 org1
@@ -377,7 +377,7 @@ peer channel update -o orderer.wulusai.net:7050 -c wulusaichannel -f ./channel-a
 
 ##### 安装链码
 
-```shell
+```bash
 #想要在哪个节点上安装链码就需要在哪个节点配置下install
 # -l 默认为go
 peer chaincode install -n 链码名字 -v 链码版本 -l 链码语言 -p 链码位置
@@ -387,7 +387,7 @@ peer chaincode install -n bhxycc -v 1.0 -p github.com/chaincode/bhxy
 
 ##### 链码初始化
 
-```shell
+```bash
 #init初始化 只需要任意节点初始化一次,数据会自动同步
 #链码的初始化 
 peer chaincode instantiate -o orderer节点地址:端口 -tls true -cafile orderer节点pem格式证书文件 -C 通道名称 -n 链码名称 -l 链码语言 -v 链码版本 -c 链码init函数调用 -P 背书策略
@@ -401,7 +401,7 @@ peer chaincode instantiate -o orderer.wulusai.net:7050 --tls true --cafile /opt/
 
 ##### invoke调用
 
-```shell
+```bash
 #调用需要向orderer节点发送请求,然后由背书规则背书,结果发送给orderer打包
 peer chaincode invoke  -n 链码名字 -c '{"Args":["userRegister", "2", "user1"]}' -o orderer节点地址:端口 --tls true --cafile orderer节点pem格式证书文件 -C wulusaichannel --peerAddresses org1背书节点:端口 --tlsRootCertFiles org1根ca.crt --peerAddresses org2背书节点:端口 --tlsRootCertFiles org2根ca.crt
 #invoke调用  需要根据制定背书策略选择背书节点证书 orderer证书
@@ -421,7 +421,7 @@ peer chaincode invoke  -n bhxycc -c '{"Args":["userRegister", "2", "user1"]}' -o
 
 ##### 查询
 
-```shell
+```bash
 #查询 可以查询 查询不需要经过orderer,只需要向通道内节点请求就行
 peer chaincode query -C wulusaichannel -n bhxycc -c '{"Args":["queryUser", "2"]}'
 #升级链码 这个代码无用
@@ -432,7 +432,7 @@ https://godoc.org/github.com/hyperledger/fabric/core/chaincode/shim
 
 配置环境的文件的意义
 
-```shell
+```bash
 # core peer msp config path 当前peer节点的admin的msp证书
 #peerOrg下的组织org2 的 users 下的 admin用户的msp
 export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.wulusai.net/users/Admin@org2.wulusai.net/msp
@@ -471,7 +471,7 @@ export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric
 
 如何寻找对应的账号目录
 
-```shell
+```bash
 #Orderer 启动路径
 crypto-config/ordererOrganizations/wulusai.net/orderers/orderer.wulusai.net/msp
 #Peer 启动的账号路径
@@ -482,7 +482,7 @@ crypto/peerOrganizations/org2.wulusai.net/users/Admin@org2.wulusai.net/msp
 
 
 
-```shell
+```bash
 
 ```
 
@@ -496,7 +496,7 @@ crypto的tree
 
 
 
-```shell
+```bash
 node.js 的api 编程去组织上生成账号
 官方建议,一个组织对应一个ca
 #fabric-ca的配置 模板文件fabric-sample/base-network/docker-compose.yaml
@@ -559,7 +559,7 @@ node query.js
 
 #### solo多机多节点部署
 
-```shell
+```bash
 n台主机需要创建一个名字相同的工作目录
 #主机1:192.168.100.10
 mdir ~/wulusai
@@ -659,7 +659,7 @@ services:
 
 部署节点
 
-```shell
+```bash
 #准备好事先生成的channel-artifacts crypto-config的文件
 #切换到对应主机上 如 pee0.org1的主机 192.168.100.20
 #进入主机文件夹 ~/wulusai
@@ -684,7 +684,7 @@ services:
 
 #### fabric网络搭建过程
 
-```shell
+```bash
 #1.编写组织信息的配置文件,文件中声明多少个组织,每个组织多少个节点多少用户
 crypto-config.yaml
 #2.生成创世块文件和通道文件,文件中声明配置组织信息,共识机制,区块生成策略,组织关系的概述
@@ -737,7 +737,7 @@ peer节点
 
 SCP远程拷贝
 
-```shell
+```bash
 scp 要拷贝的文件路径 远程主机用户名@远程主机ip:远程主机目录
 scp -r 要拷贝的目录 远程主机用户名@远程主机ip:远程主机目录
 scp -r /root/wulusai root@192.168.1.2:/root
@@ -759,7 +759,7 @@ peer chaincode install ./channel-artifacts/bhxycc.1.0.out
 
 #### kafka多级多节点配置
 
-```shell
+```bash
 #为保证集群的可用性,3台主机
 #zookeeper主机1:192.168.100.101
 #zookeeper主机2:192.168.100.102
@@ -898,7 +898,7 @@ services:
 
 ##### 启用kafka集群
 
-```shell
+```bash
 #查看当前分支
 git branch -a
 #切换到kafka集群的分支
@@ -1054,21 +1054,21 @@ PeerOrgs:
 
 
 
-```shell
+```bash
 cd org3-artifacts #当前操作所在的目录
 cryptogen generate --config=./org3-crypto.yaml
 ```
 
 json格式打印org3材料
 
-```shell
+```bash
 #没有指定configtx配置文件因为configtxgen会默认使用当前目录下的这个文件
 export FABRIC_CFG_PATH=$PWD && ../../bin/configtxgen -printOrg Org3MSP > ../channel-artifacts/org3.json
 ```
 
 进入到cli容器中生成org3的配置并加入到区块中
 
-```shell
+```bash
 docker exec -it cli bash
 #设置了ORDERER_CA和CHANNEL_NAME两个环节变量
 export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem  && export CHANNEL_NAME=mychannel
@@ -1105,7 +1105,7 @@ CORE_PEER_GOSSIP_ORGLEADER=true
 
 将org3加入通道
 
-```shell
+```bash
 #启动org3 两个peer节点和一个org3cli容器
 docker-compose -f docker-compose-org3.yaml up -d
 #进入到cli
