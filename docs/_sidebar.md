@@ -15,5 +15,6 @@
  
 - Git
 	- [常用语法](zh-cn/Git/常用语法.md)
+	- [常见的开源协议](zh-cn/Git/常见的开源协议.md)
 - fabric
 	- [开始](zh-cn/Fabric/start.md)
