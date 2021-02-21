@@ -2,7 +2,7 @@
     - [中文文档](zh-cn/README.md)
     
 - Java
-
+	- [设计模式](zh-cn/Java/设计模式.md)
 - Golang
 	- [开始](zh-cn/Golang/start.md)
 - Python
