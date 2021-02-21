@@ -3,6 +3,7 @@
     
 - Java
 	- [设计模式](zh-cn/Java/设计模式.md)
+	- [UML类图](zh-cn/Java/UML.md)
 - Golang
 	- [开始](zh-cn/Golang/start.md)
 - Python
