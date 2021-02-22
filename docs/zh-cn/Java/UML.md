@@ -6,7 +6,7 @@
 [mermaid类图画法](https://mermaid-js.github.io/mermaid/#/classDiagram)
 
 `markdown`画图示例如下
-
+源码请参考本项目github`右上角那只猫`
 ## Class
 ```mermaid
 classDiagram

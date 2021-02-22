@@ -39,6 +39,31 @@ npm i docsify-cli -g
 docsify init ./docs
 docsify serve docs
 ```
+### 支持 mermaid
+[官方参考](https://docsify.js.org/#/zh-cn/markdown?id=%e6%94%af%e6%8c%81-mermaid)
+
+需要注意的是 在 `index.html`中引入
+`<script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>`
+需要在
+`<script>
+window.$docsify = { 
+	markdown: {
+		renderer: {
+			code: function(code, lang) {
+				if (lang === "mermaid") {
+					return (
+						'<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+					);
+				}
+				return this.origin.code.apply(this, arguments);
+			}
+		}
+	}
+}
+</script>`
+之前,在它之后引入会造成不少bug问题
+
+
 #### 本地预览
 [预览](http://localhost:3000)
 
