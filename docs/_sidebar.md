@@ -11,7 +11,8 @@
 - Rust
 	- [开始](zh-cn/Rust/start.md)
 - Linux
-
+	- [java服务器部署](zh-cn/Linux/java.md)
+	- [nginx服务器部署](zh-cn/Linux/nginx.md)
 - Node.js
  
 - Git
