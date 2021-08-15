@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>原神解密</title>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+		
+		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+		
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+		<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<!-- 生产环境版本，优化了尺寸和速度 -->
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+	</head>
+	<body>
+		<div id="app">
+		<div class="container">
+				<h1>原神解密</h1>
+		  <p class="lead">方块解密,包含两种方块:一种旋转方块,只需保证所有方块<strong>朝向一致</strong>即可解除;一种亮灯方块,需要保证所有方块图案<strong>全亮</strong>才成功</p>
+			
+			<p class="lead">方块个数: 
+			<label class="radio-inline"><input type="radio" id="three" value="3" v-model="boxsize">3</label>
+			<label class="radio-inline"><input type="radio" id="four" value="4" v-model="boxsize">4</label>
+			<label class="radio-inline"><input type="radio" id="five" value="5" v-model="boxsize">5</label>
+			</p>
+			<p class="lead">模式: 
+			<label class="radio-inline"><input type="radio" id="model1" value="true" v-model="model">朝向一致</label>
+			<label class="radio-inline"><input type="radio" id="model2" value="false" v-model="model">全亮</label>
+			</p>
+			<label>初始状态(默认朝向一致的面为0,顺时针方向+1/全部亮起为0,亮一瓣1,亮两瓣2): </label>
+			<input type="text" class="form-control" style="width: 50%;" id="message" v-model="message" placeholder="输入方块初始状态,例:方块个数选5,键入01213" onKeyUp="value=value.replace(/[^0-4]/g,'')" onchange="value=value.replace(/[^0-4]/g,'')" >
+			<button type="button" class="btn btn-info"  @click="work" ><span>点我试试</span ></button>
+			<br>
+			<div v-if="boxsize==3">
+				操作第<strong>0</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check311" value="0" v-model="checked3"></label>
+				<label ><input type="checkbox" id="check312" value="1" v-model="checked3"></label>
+				<label ><input type="checkbox" id="check313" value="2" v-model="checked3"></label>
+				<br>
+				操作第<strong>1</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check321" value="3" v-model="checked3"></label>
+				<label ><input type="checkbox" id="check322" value="4" v-model="checked3"></label>
+				<label ><input type="checkbox" id="check323" value="5" v-model="checked3"></label>
+				<br>
+				操作第<strong>2</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check331" value="6" v-model="checked3"></label>
+				<label ><input type="checkbox" id="check332" value="7" v-model="checked3"></label>
+				<label ><input type="checkbox" id="check333" value="8" v-model="checked3"></label>
+				<br>
+				<span>Checked: {{checked3}}</span>
+			</div>
+			<div v-if="boxsize==4">
+				操作第<strong>0</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check411" value="0" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check412" value="1" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check413" value="2" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check414" value="3" v-model="checked4"></label>
+				<br>
+				操作第<strong>1</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check421" value="4" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check422" value="5" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check423" value="6" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check424" value="7" v-model="checked4"></label>
+				<br>
+				操作第<strong>2</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check431" value="8" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check432" value="9" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check433" value="10" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check434" value="11" v-model="checked4"></label>
+				<br>
+				操作第<strong>3</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check441" value="12" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check442" value="13" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check443" value="14" v-model="checked4"></label>
+				<label ><input type="checkbox" id="check444" value="15" v-model="checked4"></label>
+				<br>
+				<span>Checked: {{checked4}}</span>
+			</div>
+			<div v-if="boxsize==5">
+				操作第<strong>0</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check511" value="0" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check512" value="1" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check513" value="2" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check514" value="3" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check515" value="4" v-model="checked5"></label>
+				<br>
+				操作第<strong>1</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check521" value="5" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check522" value="6" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check523" value="7" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check524" value="8" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check525" value="9" v-model="checked5"></label>
+				<br>
+				操作第<strong>2</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check531" value="10" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check532" value="11" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check533" value="12" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check534" value="13" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check535" value="14" v-model="checked5"></label>
+				<br>
+				操作第<strong>3</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check541" value="15" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check542" value="16" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check543" value="17" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check544" value="18" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check545" value="19" v-model="checked5"></label>
+				<br>
+				操作第<strong>4</strong>个方块影响方块:
+				<label ><input type="checkbox" id="check551" value="20" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check552" value="21" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check553" value="22" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check554" value="23" v-model="checked5"></label>
+				<label ><input type="checkbox" id="check555" value="24" v-model="checked5"></label>
+				<br>
+				<span>Checked: {{checked5}}</span>
+			</div>
+			<br>
+			<span>Answer: {{answer}}</span>
+		</div>
+		</div>
+		<script>
+			//队列
+			class Queue {
+			  constructor() {
+			    this.items = {};
+			    this.headIndex = 0;
+			    this.tailIndex = 0;
+			  }
+			//入列
+			  push(item) {
+			    this.items[this.tailIndex] = item;
+			    this.tailIndex++;
+			  }
+			//出列
+			  poll() {
+			    const item = this.items[this.headIndex];
+			    delete this.items[this.headIndex];
+			    this.headIndex++;
+			    return item;
+			  }
+			//查看头元素
+			  peek() {
+			    return this.items[this.headIndex];
+			  }
+			//队列长度
+			  get length() {
+			    return this.tailIndex - this.headIndex;
+			  }
+			}
+			//节点
+			class Node {
+				constructor() {
+				  this.val = [];
+				  this.path = "";
+				}
+			}
+			
+		
+
+			var app = new Vue({
+			  el: '#app',
+			  data: {
+				  model:true,
+				boxsize:3,
+			    message: '',
+				operationList:[{val:[1,0,1,0,0],path:"0"},
+								{val:[1,1,1,0,0],path:"1"},
+								{val:[1,0,1,0,1],path:"2"},
+								{val:[0,0,1,1,1],path:"3"},
+								{val:[0,0,1,0,1],path:"4"}],
+				linkedList:new Queue(),
+				question:[0,1,2,1,3],
+				answer:"",
+				checked3:[],
+				checked4:[],
+				checked5:[]
+			  },
+			  methods: {
+				      /**
+				       * 执行遍历操作
+					   * @auther wulusai2333
+				       * @param operationList 操作集合
+				       * @param linkedList 队列
+				       */
+				      work:function() {
+						  if(this.message==""){
+							  this.answer="有必填项为空!";
+							  return;
+						  }
+						  var message=this.message;
+						  this.question=[];
+						  for (var i = 0; i < message.length; i++) {
+						  	var s=~~message.charAt(i);
+							this.question.push(s);
+						  }
+						  var boxsize=~~this.boxsize;
+						  var box=[];
+						  if (boxsize==3) {
+						  	box=this.checked3;
+						  } else if(boxsize==4){
+						  	box=this.checked4;
+						  }else if(boxsize==5){
+						  	box=this.checked5;
+						  }
+						 var operationList=this.$options.methods.operation(boxsize,box);
+						 var linkedList=new Queue();
+						  var q=new Node();
+						  q.val=this.question;
+						  q.path="";
+						  linkedList.push(q);
+						  
+				          while (linkedList.length!=0){
+				              var root = linkedList.poll();
+				              for ( index in operationList) {
+				                  var node = this.$options.methods.nodeAdd(root, operationList[index],this.model);
+				                  linkedList.push(node);
+								  if("true"==this.model){
+									  //数组数据相等
+									  if (this.$options.methods.isSame(node.val)){
+									    console.log(node.path);
+									  	this.answer=node.path;
+									  	this.linkedList=new Queue();
+									  	return;
+									  }
+								  }else{
+									  if (this.$options.methods.isZero(node.val)){
+									      //输出结果
+									    console.log("全为0的结果:"+node.path);
+									  	this.answer=node.path;
+									  	this.linkedList=new Queue();
+									    return;
+									  }
+								  }
+				              }
+				              //取出值和路径,计算值和拼接路径并生成新的node放入队列中
+				              if (linkedList.length>(1<<15)) {
+								  this.answer="未找到解决方案!";
+								  break;
+							  }
+				          }
+						  return;
+				      },
+				      /**
+				       * 两个Node相加生成一个新Node
+					   * @auther wulusai2333
+				       * @param root 原始数据
+				       * @param operation 操作数据
+				       * @return 操作后新节点
+				       */
+				      nodeAdd:function(root,operation,model){
+						  var list = [];
+				          for (i = 0; i < root.val.length; i++) {
+							  var a=4;
+							  if("false"==model){
+								 a=3;
+							  }
+							  var num=(root.val[i]+operation.val[i])%a;
+							  list.push(num);
+							 
+				          }
+						  var node=new Object();　　　　
+						  node.val=list;
+						  node.path=root.path+operation.path;
+				         return node;
+				      },
+				  
+				      /**
+				       * 判断数组是否全为0
+					   * @auther wulusai2333
+				       * @param list 数字数组
+				       * @return 全为0返回true
+				       */
+				      isZero:function( list){
+				          for ( index in list) {
+				              if (list[index]!=0){
+				                  return false;
+				              }
+				          }
+				          return true;
+				      },
+				  
+				      /**
+				       * 判断数组数据是否全一致
+					   * @auther wulusai2333
+				       * @param list 数据组数据
+				       * @return 是否全一致
+				       */
+				      isSame:function( list){
+				          for ( index in list) {
+				              if (list[index]!=(list[0])){
+				                  return false;
+				              }
+				          }
+				          return true;
+				      },
+					  /**
+					   * 获取操作集合
+					   * @auther wulusai2333
+					   * @param	方块个数
+					   * @param 选中的值
+					   * @return 操作集合
+					   */
+					  operation:function(boxsize,box){
+						  var operationList=[];
+						  for (var i = 0; i < boxsize; i++) {
+						  	operationList.push(new Node());
+						  }
+						  for (var i = 0; i < boxsize*boxsize; i++) {
+							  var index=Math.floor(i/boxsize);
+							  operationList[index].path=index+"";
+							  if(box.includes(i+"")){
+								  operationList[index].val.push(1);
+								  continue;
+							  }
+								operationList[index].val.push(0);
+								
+						  }
+						   return operationList;
+					  }
+			  }
+			})
+		</script>
+	</body>
+
+</html>
