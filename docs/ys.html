@@ -22,8 +22,8 @@
 				<h1>原神解密</h1>
 		  <p class="lead">方块解密,包含两种方块:<br/>
 		  一种旋转方块,只需保证所有方块<strong>朝向一致</strong>即可解除;<br/>
-		  一种亮灯方块,需要保证所有方块图案<strong>亮灯数一致</strong>才成功</p>
-			
+		  一种亮灯方块,需要保证所有方块图案<strong>亮灯数一致</strong>才成功;
+			<p>如果觉得好用可以在<a type="button" href="https://b23.tv/UJmxrl" class="btn btn-link"><u>视频演示</u></a>中点赞投币收藏,后续更新也会在评论区说明</p>
 			<p class="lead">方块个数: 
 			<label class="radio-inline"><input type="radio" id="three" value="3" v-model="boxsize">3</label>
 			<label class="radio-inline"><input type="radio" id="four" value="4" v-model="boxsize">4</label>
@@ -54,6 +54,8 @@
 				<label ><input type="checkbox" id="check332" value="7" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check333" value="8" v-model="checked3"></label>
 				<br>
+				<button type="button" class="btn btn-danger"  @click="remove(3)" ><span>清空操作</span ></button>
+				<br>
 				<span>Checked: {{checked3}}</span>
 			</div>
 			<div v-if="boxsize==4">
@@ -80,6 +82,8 @@
 				<label ><input type="checkbox" id="check442" value="13" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check443" value="14" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check444" value="15" v-model="checked4"></label>
+				<br>
+				<button type="button" class="btn btn-danger"  @click="remove(4)" ><span>清空操作</span ></button>
 				<br>
 				<span>Checked: {{checked4}}</span>
 			</div>
@@ -119,10 +123,12 @@
 				<label ><input type="checkbox" id="check554" value="23" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check555" value="24" v-model="checked5"></label>
 				<br>
+				<button type="button" class="btn btn-danger"  @click="remove(5)" ><span>清空操作</span ></button>
+				<br>
 				<span>Checked: {{checked5}}</span>
 			</div>
 			<br>
-			<span>Answer: {{answer}}</span>
+			<span>答案(例:044表示第0个方块,第4个方块,第4个方块的操作): {{answer}}</span>
 		</div>
 		</div>
 		<script>
@@ -303,8 +309,8 @@
 					  /**
 					   * 获取操作集合
 					   * @auther wulusai2333
-					   * @param	方块个数
-					   * @param 选中的值
+					   * @param	boxsize 方块个数
+					   * @param box 选中的值
 					   * @return 操作集合
 					   */
 					  operation:function(boxsize,box){
@@ -323,6 +329,24 @@
 								
 						  }
 						   return operationList;
+					  },
+					  /**
+					   * 清空操作集合
+					   * @auther wulusai2333
+					   * @param num 操作类型
+					   * @return 
+					   */
+					  remove:function(num){
+						  if(num=="3"){
+							  this.checked3=[];
+							  this.message="";
+						  }else if(num=="4"){
+							  this.checked4=[];
+							  this.message="";
+						  }else if(num=="5"){
+							  this.checked5=[];
+							  this.message="";
+						  }
 					  }
 			  }
 			})
