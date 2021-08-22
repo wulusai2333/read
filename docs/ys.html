@@ -30,12 +30,12 @@
 			<label class="radio-inline"><input type="radio" id="five" value="5" v-model="boxsize">5</label>
 			</p>
 			<p class="lead">模式: 
-			<label class="radio-inline"><input type="radio" id="model1" value="true" v-model="model">朝向一致</label>
-			<label class="radio-inline"><input type="radio" id="model2" value="false" v-model="model">全亮</label>
-			<label class="radio-inline"><input type="radio" id="model2" value="same" v-model="model">亮灯一致</label>
+			<label class="radio-inline"><input type="radio" id="model1" value="model1" v-model="model">朝向一致</label>
+			<label class="radio-inline"><input type="radio" id="model2" value="model2" v-model="model">全亮</label>
+			<label class="radio-inline"><input type="radio" id="model2" value="model3" v-model="model">亮灯一致</label>
 			</p>
 			<label>初始状态(默认紫色花纹正对角色的面为1,顺时针方向+1/全部亮起为1,亮一瓣2,亮两瓣3): </label>
-			<input type="text" class="form-control" style="width: 50%;" id="message" v-model="message" placeholder="输入方块初始状态,例:方块个数选5,键入01213" onKeyUp="value=value.replace(/[^0-4]/g,'')" onchange="value=value.replace(/[^0-4]/g,'')" >
+			<input type="text" class="form-control" style="width: 50%;" id="message" v-model="message" placeholder="输入方块初始状态,例:方块个数选5,键入01213" onKeyUp="value=value.replace(/[^1-5]/g,'')" onchange="value=value.replace(/[^1-5]/g,'')" >
 			<button type="button" class="btn btn-info"  @click="work" ><span>点我试试</span ></button>
 			<br>
 			<div v-if="boxsize==3">
@@ -173,7 +173,7 @@
 			var app = new Vue({
 			  el: '#app',
 			  data: {
-				  model:true,
+				  model:"model1",
 				boxsize:3,
 			    message: '',
 				operationList:[{val:[1,0,1,0,0],path:"0"},
@@ -227,7 +227,7 @@
 				              for ( index in operationList) {
 				                  var node = this.$options.methods.nodeAdd(root, operationList[index],this.model);
 				                  linkedList.push(node);
-								  if(true==this.model||"same"==this.model){
+								  if("model1"==this.model||"model3"==this.model){
 									  //数组数据相等
 									  if (this.$options.methods.isSame(node.val)){
 									    console.log(node.path);
@@ -276,7 +276,7 @@
 						  var list = [];
 				          for (i = 0; i < root.val.length; i++) {
 							  var a=4;
-							  if("false"==model||"same"==model){
+							  if("model2"==model||"model3"==model){
 								 a=3;
 							  }
 							  var num=(root.val[i]+operation.val[i])%a;
