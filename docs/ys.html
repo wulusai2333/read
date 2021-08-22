@@ -34,22 +34,22 @@
 			<label class="radio-inline"><input type="radio" id="model2" value="false" v-model="model">全亮</label>
 			<label class="radio-inline"><input type="radio" id="model2" value="same" v-model="model">亮灯一致</label>
 			</p>
-			<label>初始状态(默认朝向一致的面为0,顺时针方向+1/全部亮起为0,亮一瓣1,亮两瓣2): </label>
+			<label>初始状态(默认紫色花纹正对角色的面为1,顺时针方向+1/全部亮起为1,亮一瓣2,亮两瓣3): </label>
 			<input type="text" class="form-control" style="width: 50%;" id="message" v-model="message" placeholder="输入方块初始状态,例:方块个数选5,键入01213" onKeyUp="value=value.replace(/[^0-4]/g,'')" onchange="value=value.replace(/[^0-4]/g,'')" >
 			<button type="button" class="btn btn-info"  @click="work" ><span>点我试试</span ></button>
 			<br>
 			<div v-if="boxsize==3">
-				操作第<strong>0</strong>个方块影响方块:
+				操作第<strong>1</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check311" value="0" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check312" value="1" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check313" value="2" v-model="checked3"></label>
 				<br>
-				操作第<strong>1</strong>个方块影响方块:
+				操作第<strong>2</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check321" value="3" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check322" value="4" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check323" value="5" v-model="checked3"></label>
 				<br>
-				操作第<strong>2</strong>个方块影响方块:
+				操作第<strong>3</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check331" value="6" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check332" value="7" v-model="checked3"></label>
 				<label ><input type="checkbox" id="check333" value="8" v-model="checked3"></label>
@@ -59,25 +59,25 @@
 				<span>Checked: {{checked3}}</span>
 			</div>
 			<div v-if="boxsize==4">
-				操作第<strong>0</strong>个方块影响方块:
+				操作第<strong>1</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check411" value="0" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check412" value="1" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check413" value="2" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check414" value="3" v-model="checked4"></label>
 				<br>
-				操作第<strong>1</strong>个方块影响方块:
+				操作第<strong>2</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check421" value="4" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check422" value="5" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check423" value="6" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check424" value="7" v-model="checked4"></label>
 				<br>
-				操作第<strong>2</strong>个方块影响方块:
+				操作第<strong>3</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check431" value="8" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check432" value="9" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check433" value="10" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check434" value="11" v-model="checked4"></label>
 				<br>
-				操作第<strong>3</strong>个方块影响方块:
+				操作第<strong>4</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check441" value="12" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check442" value="13" v-model="checked4"></label>
 				<label ><input type="checkbox" id="check443" value="14" v-model="checked4"></label>
@@ -88,35 +88,35 @@
 				<span>Checked: {{checked4}}</span>
 			</div>
 			<div v-if="boxsize==5">
-				操作第<strong>0</strong>个方块影响方块:
+				操作第<strong>1</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check511" value="0" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check512" value="1" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check513" value="2" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check514" value="3" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check515" value="4" v-model="checked5"></label>
 				<br>
-				操作第<strong>1</strong>个方块影响方块:
+				操作第<strong>2</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check521" value="5" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check522" value="6" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check523" value="7" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check524" value="8" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check525" value="9" v-model="checked5"></label>
 				<br>
-				操作第<strong>2</strong>个方块影响方块:
+				操作第<strong>3</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check531" value="10" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check532" value="11" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check533" value="12" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check534" value="13" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check535" value="14" v-model="checked5"></label>
 				<br>
-				操作第<strong>3</strong>个方块影响方块:
+				操作第<strong>4</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check541" value="15" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check542" value="16" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check543" value="17" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check544" value="18" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check545" value="19" v-model="checked5"></label>
 				<br>
-				操作第<strong>4</strong>个方块影响方块:
+				操作第<strong>5</strong>个方块影响方块:
 				<label ><input type="checkbox" id="check551" value="20" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check552" value="21" v-model="checked5"></label>
 				<label ><input type="checkbox" id="check553" value="22" v-model="checked5"></label>
@@ -128,7 +128,7 @@
 				<span>Checked: {{checked5}}</span>
 			</div>
 			<br>
-			<span>答案(例:044表示第0个方块,第4个方块,第4个方块的操作): {{answer}}</span>
+			<span>答案(操作顺序): {{answer}}</span>
 		</div>
 		</div>
 		<script>
@@ -203,7 +203,7 @@
 						  var message=this.message;
 						  this.question=[];
 						  for (var i = 0; i < message.length; i++) {
-						  	var s=~~message.charAt(i);
+						  	var s=~~message.charAt(i)-1;
 							this.question.push(s);
 						  }
 						  var boxsize=~~this.boxsize;
@@ -227,11 +227,19 @@
 				              for ( index in operationList) {
 				                  var node = this.$options.methods.nodeAdd(root, operationList[index],this.model);
 				                  linkedList.push(node);
-								  if("true"==this.model||"same"==this.model){
+								  if(true==this.model||"same"==this.model){
 									  //数组数据相等
 									  if (this.$options.methods.isSame(node.val)){
 									    console.log(node.path);
-									  	this.answer=node.path;
+										var a="";
+										for (var i = 0; i < node.path.length; i++) {
+											a+=Number(node.path[i])+1;
+										}
+									  	var a="";
+									  	for (var i = 0; i < node.path.length; i++) {
+									  		a+="操作第"+(Number(node.path[i])+1)+"个方块,";
+									  	}
+									  	this.answer=a;
 									  	this.linkedList=new Queue();
 									  	return;
 									  }
@@ -239,7 +247,11 @@
 									  if (this.$options.methods.isZero(node.val)){
 									      //输出结果
 									    console.log("全为0的结果:"+node.path);
-									  	this.answer=node.path;
+									  	var a="";
+									  	for (var i = 0; i < node.path.length; i++) {
+									  		a+="操作第"+(Number(node.path[i])+1)+"个方块,";
+									  	}
+									  	this.answer=a;
 									  	this.linkedList=new Queue();
 									    return;
 									  }
