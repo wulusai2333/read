@@ -13,6 +13,7 @@
 - Linux
 	- [java服务器部署](zh-cn/Linux/java.md)
 	- [nginx服务器部署](zh-cn/Linux/nginx.md)
+
 - Node.js
  
 - Git
@@ -20,3 +21,5 @@
 	- [常见的开源协议](zh-cn/Git/常见的开源协议.md)
 - fabric
 	- [开始](zh-cn/Fabric/start.md)
+- 其他
+	- [华为移动应用引擎](zh-cn/Linux/华为移动应用引擎安装第三方APP.md)

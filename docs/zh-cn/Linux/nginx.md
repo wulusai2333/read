@@ -188,3 +188,8 @@ location ^~ /tea/ {
 
 - rewrite … permanent   永久性重定向，请求日志中的状态码为301
 - rewrite … redirect    临时重定向，请求日志中的状态码为302
+
+
+## 配置https
+
+[openssl生成证书](https://www.huaweicloud.com/articles/54031e9ed6adeec67c026871bb33d6a2.html)
