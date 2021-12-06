@@ -15,3 +15,12 @@ export JAVA_HOME=/usr/local/java
 export PATH=$JAVA_HOME/bin/:$PATH
 source /etc/profile
 ```
+
+### jar包的解压与压缩
+
+```bash
+#解压jar包内的文件到当前目录
+jar -xvf xxx.jar 
+#将当前目录下的所有文件打成jar包，jar包名为xxx.jar
+jar -cvf xxx.jar ./
+```
