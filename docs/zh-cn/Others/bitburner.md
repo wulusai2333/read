@@ -175,8 +175,7 @@ export async function main(ns) {
 		}
 	}
 }
-
-// sacn server
+//sacn server
 function scanHost(ns, father) {
 	var tempList = ns.scan(father);
 
@@ -196,10 +195,8 @@ function scanHost(ns, father) {
 
 		}
 	}
-
 }
-
-// hack server
+//hack server 
 function hackServer(ns, serverName) {
 	if (hacktools.includes("BruteSSH.exe")) {
 		ns.brutessh(serverName);
@@ -219,4 +216,6 @@ function hackServer(ns, serverName) {
 	//执行nuke失败脚本会抛出异常
 	//ns.nuke(serverName);
 }
+
 ```
+
