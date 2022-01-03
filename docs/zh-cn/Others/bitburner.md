@@ -51,9 +51,9 @@ export async function main(ns) {
 
 	//运行脚本
 	var jsRam = ns.getScriptRam("start.js");
-	var thisjsRam = ns.getScriptRam("home.js");
+	var usedRam = ns.getServerUsedRam("home");
 	var serverRam = ns.getServerMaxRam("home");
-	var threads = Math.floor((serverRam - thisjsRam-8) / jsRam);
+	var threads = Math.floor((serverRam - usedRam) / jsRam);
 
 	ns.print("jsRam: ", jsRam, " serverRam: ", serverRam, " threads: ", threads);
 	if (threads > 0) {
