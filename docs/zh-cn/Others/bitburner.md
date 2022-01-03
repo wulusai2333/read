@@ -216,6 +216,5 @@ function hackServer(ns, serverName) {
 	//执行nuke失败脚本会抛出异常
 	//ns.nuke(serverName);
 }
-
 ```
 
