@@ -22,4 +22,5 @@
 - fabric
 	- [开始](zh-cn/Fabric/start.md)
 - 其他
-	- [华为移动应用引擎](zh-cn/Linux/华为移动应用引擎安装第三方APP.md)
+	- [windows](zh-cn/Others/windows.md)
+	- [bitburner](zh-cn/Others/bitburner.md)
