@@ -36,7 +36,7 @@ run home --tail
 ```
 ### hack.js
 复制start.js文件到所有主机上并在其上启动
-[home.js](https://github.com/wulusai2333/read/tree/master/docs/bitburnerjs/hack.js) |5.20GB
+[hack.js](https://github.com/wulusai2333/read/tree/master/docs/bitburnerjs/hack.js) |5.20GB
 ```bash
 run hack.js --tail
 ```
