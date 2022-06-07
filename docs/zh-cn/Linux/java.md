@@ -24,3 +24,7 @@ jar -xvf xxx.jar
 #将当前目录下的所有文件打成jar包，jar包名为xxx.jar
 jar -cvf xxx.jar ./
 ```
+### 打印maven依赖树
+```bash
+mvn dependency:tree > tree.log
+```

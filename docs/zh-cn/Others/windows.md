@@ -8,3 +8,8 @@ route print -4
 ::删除路由
 route delete 20.0.0.0
 ```
+
+### 计算hash
+```basic
+certutil -hashfile C:\win2012.vhd MD5
+```
