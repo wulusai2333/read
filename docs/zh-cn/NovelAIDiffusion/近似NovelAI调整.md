@@ -2,11 +2,11 @@
 
 前言:调整后NSFW的模型与NovelAI官网上的一致,SFW的模型会有点区别
 
-前提,显卡最好拥有6G及以上显存,并且拥有CODA工具
+前提,显卡最好拥有6G及以上显存,并且拥有CODA工具,虽然2G,4G也能跑,但要改配置,参考下面的链接,各种安装问题的解决方案
 
 新用户先看这个,GTX 16XX显卡会比较麻烦,20系,30系显卡问题不大
 
- [https ://rentry.org/voldy](https://rentry.org/voldy)
+ [https ://rentry.org/voldy 解决安装过程各种疑难杂症](https://rentry.org/voldy)
 
 确保已经安装了较新的git和python
 
@@ -48,7 +48,7 @@ stable-diffusion-webui\models\Stable-diffusion\
 python -m pip install --upgrade pip
 ```
 
-执行下载依赖,如果上面的步骤做完了,可以直接执行成功,依赖下载速度因人而异,可能几分钟也可能几小时
+执行下载依赖,如果上面的步骤做完了,可以直接执行成功,依赖下载速度因人而异,可能几分钟也可能几小时,如果是`GTX 16xx`显卡的用户,可能是用`webui-user.bat`启动的
 
 ```bash
 web.bat
