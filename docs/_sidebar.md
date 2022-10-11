@@ -24,3 +24,5 @@
 - 其他
 	- [windows](zh-cn/Others/windows.md)
 	- [bitburner](zh-cn/Others/bitburner.md)
+- NovelAIDiffusion
+	- [近似NovelAI调整](zh-cn/NovelAIDiffusion/近似NovelAI调整.md)

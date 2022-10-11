@@ -193,3 +193,58 @@ location ^~ /tea/ {
 ## 配置https
 
 [openssl生成证书](https://www.huaweicloud.com/articles/54031e9ed6adeec67c026871bb33d6a2.html)
+
+[查看和验证证书信息](https://www.jianshu.com/p/f5f93c89155e)
+
+```bash
+检查tls版本
+ openssl s_client -connect www.google.com:443
+```
+## http请求跳转https
+[同server监听多端口](https://www.cnblogs.com/digdeep/p/12617075.html)
+```bash
+error_page  497  https://$host:端口$uri;
+```
+
+### nginx平滑升级
+[平滑升级](https://zhuanlan.zhihu.com/p/193078620)
+或者直接升级
+1. 先确定nginx的安装位置
+```bash
+whereis nginx
+find / -name nginx
+```
+2. 查看现有的nginx编译参数
+```bash
+/usr/local/nginx/sbin/nginx -V
+
+```
+3. 根据configure参数调整和 make
+> nginx version: nginx/1.16.1
+> built by gcc 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) 
+> built with OpenSSL 1.0.2k-fips  26 Jan 2017
+> TLS SNI support enabled
+> configure arguments: --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+> 
+4. nginx源码下载和编译
+```bash
+wget http://nginx.org/download/nginx-1.23.1.tar.gz
+tar -zxf nginx-1.23.1.tar.gz
+./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module
+make
+```
+5. 备份和替换
+```bash
+mv /usr/local/nginx/sbin/nginx /usr/local/nginx/sbin/nginx_$(date +%F)
+cp ./objs/nginx /usr/local/nginx/sbin/
+/usr/local/nginx/sbin/nginx -t
+```
+6. 重启服务
+```bash
+#如果nginx.pid正常运作
+nginx -s restart
+
+#如果需要停止并启动新服务
+nginx -s stop
+/usr/local/nginx/sbin/nginx
+```

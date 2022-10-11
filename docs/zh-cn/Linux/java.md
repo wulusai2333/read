@@ -28,3 +28,20 @@ jar -cvf xxx.jar ./
 ```bash
 mvn dependency:tree > tree.log
 ```
+
+### maven配置本地仓库
+> project.basedir 就是项目的根目录
+```xml
+<repository>
+    <id>in-project</id>
+    <name>In Project Repo</name>
+    <url>file:///${project.basedir}/libs</url>
+</repository>
+
+<dependency>
+    <groupId>dropbox</groupId>
+    <artifactId>dropbox-sdk</artifactId>
+    <version>1.3.1</version>
+</dependency>
+
+```
