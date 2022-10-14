@@ -26,3 +26,4 @@
 	- [bitburner](zh-cn/Others/bitburner.md)
 - NovelAIDiffusion
 	- [近似NovelAI调整](zh-cn/NovelAIDiffusion/近似NovelAI调整.md)
+	- [训练自定义角色模型](zh-cn/NovelAIDiffusion/训练自定义角色模型.md)
