@@ -27,3 +27,4 @@
 - NovelAIDiffusion
 	- [近似NovelAI调整](zh-cn/NovelAIDiffusion/近似NovelAI调整.md)
 	- [训练自定义角色模型](zh-cn/NovelAIDiffusion/训练自定义角色模型.md)
+	- [tag的应用方法](zh-cn/NovelAIDiffusion/tag的应用方法.md)
